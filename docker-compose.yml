@@ -1,0 +1,35 @@
+version: "3"
+services:
+  db:
+    image: postgres:17.5-alpine3.21
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: "SSP2025"
+      POSTGRES_USER: "postgres"
+      POSTGRES_DB: "postgres"
+    healthcheck:
+      test: "pg_isready -d postgres -U postgres"
+      interval: 5s
+      timeout: 60s
+      retries: 20
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    ports:
+      - "54102:5432"
+  server:
+    build: ./server
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_USER: postgres
+      DB_PASSWORD: SSP2025
+      DB_NAME: postgres
+      PORT: 80
+      HOST: "0.0.0.0"
+    ports:
+      - "54101:80"
+volumes:
+  db-data:
