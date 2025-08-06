@@ -1,0 +1,23 @@
+{
+  "name": "server",
+  "module": "index.ts",
+  "type": "module",
+  "private": true,
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@types/jsdom": "^21.1.7",
+    "@types/pg": "^8.15.5",
+    "@types/superagent": "^8.1.9"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "backendium": "^0.0.15",
+    "checkeasy": "^1.2.1",
+    "jsdom": "^26.1.0",
+    "kysely": "^0.28.4",
+    "pg": "^8.16.3",
+    "superagent": "^10.2.3"
+  }
+}
